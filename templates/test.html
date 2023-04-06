@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>FiscoClic Validación de identidad de personas</title>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.jpg') }}" type="image/x-icon" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    </head>
+    <body style="background-color: #1A68FD;">
+        <p id = "show"></p>
+        <!-- <input type = "file" name="userFile" id="userFile"></input> -->
+    </body>
+    <script>
+        function base64(file, callback){
+            var coolFile = {}; 
+            function readerOnload(e){ 
+                var base64 = btoa(e.target.result); 
+                coolFile.base64 = base64; 
+                callback(coolFile) 
+            }; 
+            var reader = new FileReader(); 
+            reader.onload = readerOnload; 
+            reader.readAsBinaryString(file); 
+        }
+        const imagePath = 'https://biometric.fiscoclic.mx/static/4.png';
+        fetch(imagePath)
+            .then(res => res.blob())
+            .then(blob => {                        
+                base64( blob, function(data){ 
+                    document.getElementById('show').innerHTML = "Success";
+                    console.log(data.base64) 
+                })
+            })
+    </script>
+</html>

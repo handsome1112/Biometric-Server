@@ -1,0 +1,11 @@
+cmake
+numpy
+dlib
+imutils
+opencv-contrib-python
+tensorflow
+scikit-learn
+face-recognition
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
