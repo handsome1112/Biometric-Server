@@ -25,7 +25,7 @@
                     muted
                     id = "myVideo" >
                 </video>
-                <p id = "description">La foto de la identificación debe ser CLARA y reciente<br/>Da clic en el siguiente icono para escanear</p>
+                <p id = "description">Must put the whole ID photo in the area of rectangle<br/>La foto de la identificación debe ser CLARA y reciente<br/>Da clic en el siguiente icono para escanear</p>
             </div>
             <div id="capture_button" class="btn"></div>
             <span id = "spinners" class="spinner-double-section-out" style = "display: none"></span>
@@ -72,7 +72,7 @@
             let imageCanvas = document.createElement('canvas');
             let imageCtx = imageCanvas.getContext("2d");
             let checkmachine = 0;
-            if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i))checkmachine = 1;
+            if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i))checkmachine = 1;
             function showmodal(result, num){
                 b.style.display = "block";
                 document.getElementById('spinners').style.display = "none";
@@ -91,12 +91,13 @@
                                 document.getElementById('spinners').style.display = "block";
                                 sendImagefromCanvas();
                             };
+                            document.getElementById('exampleModal').classList.remove("show");
+                            document.getElementById('exampleModal').style.display = "none";
                         }
                         else{
                             window.location.href = "{{ url_for('signature')}}"
+                            document.getElementById('success_modal_button').style.display = "none";
                         }  
-                        document.getElementById('exampleModal').classList.remove("show");
-                        document.getElementById('exampleModal').style.display = "none";
                     }
                 }
                 else{

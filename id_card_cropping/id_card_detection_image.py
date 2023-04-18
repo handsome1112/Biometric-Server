@@ -73,12 +73,9 @@ def cropping_id_card(name, direction):
     else :
         shape = np.shape(image)
         im_width, im_height = shape[1], shape[0]
-        (left, right, top, bottom) = (xmin * im_width, xmax * im_width, ymin * im_height, ymax * im_height)
+        (left, right, top, bottom) = (xmin * im_width, xmax * im_width, (ymin) * im_height, (ymax) * im_height)
         
         id_card = Image.open('static/dataset/' + name + '/id_card.png')
-        draw = ImageDraw.Draw(id_card)
-        draw.line([(left, top), (left, bottom), (right, bottom), (right, top), (left, top)], width = 10, fill="red")
-    
         id_card.crop((left, top, right, bottom)).save('static/dataset/' + name + '/' + card_str + '.png', quality=95)
 
         return True

@@ -164,18 +164,24 @@
                                         document.getElementById('exampleModal').style.display = "block";
                                         document.getElementById('exampleModal').style.background = "#1A68FD";
                                         bmss = document.getElementById('success_modal_button');
-                                        let intervalID1
-                                        if(!intervalID1)intervalID1 = setInterval(() => {
+                                        let intervalID1, is_click = 0;
+                                        bmss.onclick = () => {   
+                                            is_click = 1;               
                                             window.location.href = "{{ url_for('clear_pic')}}";
-                                            document.getElementById('exampleModal').classList.remove("show");
-                                            document.getElementById('exampleModal').style.display = "none";  
+                                            bmss = document.getElementById('success_modal_button').style.display = "none";
+                                            // document.getElementById('exampleModal').classList.remove("show");
+                                            // document.getElementById('exampleModal').style.display = "none";  
+                                        }
+                                        if(!intervalID1)intervalID1 = setInterval(() => {
+                                            if(!is_click){
+                                                window.location.href = "{{ url_for('clear_pic')}}";
+                                                bmss = document.getElementById('success_modal_button').style.display = "none";
+                                            }
+                                            // document.getElementById('exampleModal').classList.remove("show");
+                                            // document.getElementById('exampleModal').style.display = "none";  
                                             clearInterval(intervalID1)
                                         }, 3000)
-                                        bmss.onclick = () => {                  
-                                            window.location.href = "{{ url_for('clear_pic')}}";
-                                            document.getElementById('exampleModal').classList.remove("show");
-                                            document.getElementById('exampleModal').style.display = "none";  
-                                        }
+                                        
                                     }
                                     else {
                                         if(data['message'] == "Usuario inválido")data['message'] = "Identidad facial ya pertenece a otro empleado.";
@@ -186,8 +192,9 @@
                                         bms = document.getElementById('fail_modal_button');
                                         bms.onclick = () => {
                                             window.location.href = "{{ url_for('id_card')}}";
-                                            document.getElementById('exampleModal1').classList.remove("show");
-                                            document.getElementById('exampleModal1').style.display = "none";
+                                            bms = document.getElementById('fail_modal_button').style.display = "none";
+                                            // document.getElementById('exampleModal1').classList.remove("show");
+                                            // document.getElementById('exampleModal1').style.display = "none";
                                         }
                                     }
                                 }
@@ -251,8 +258,9 @@
                         if(message == 'exist_face')document.location.href = "/"
                         else if(message == "fail_face" || message == "suspend")window.location.href = "{{ url_for('id_card')}}";
                         else window.location.href = "{{ url_for('signature')}}";
-                        document.getElementById('exampleModal1').classList.remove("show");
-                        document.getElementById('exampleModal1').style.display = "none";
+                        bms = document.getElementById('fail_modal_button').style.display = "none";
+                        // document.getElementById('exampleModal1').classList.remove("show");
+                        // document.getElementById('exampleModal1').style.display = "none";
                     }
                 }
             }

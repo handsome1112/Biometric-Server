@@ -172,8 +172,9 @@
                 bms = document.getElementById('fail_modal_button');
                 bms.onclick = () => {
                     window.location.href = "{{ url_for('f_recognition')}}";
-                    document.getElementById('exampleModal1').classList.remove("show");
-                    document.getElementById('exampleModal1').style.display = "none";
+                    bms = document.getElementById('fail_modal_button').style.display = "none";
+                    // document.getElementById('exampleModal1').classList.remove("show");
+                    // document.getElementById('exampleModal1').style.display = "none";
                 }
             }
 
