@@ -9,3 +9,4 @@ face-recognition
 Flask
 Flask-SQLAlchemy
 SQLAlchemy
+object-detection-0.1==0.1

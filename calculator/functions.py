@@ -13,10 +13,10 @@ from flask import session
 from matplotlib import pyplot as plt
 
 from tabledef import *
-from id_card_recognition.sift_flann import sift
-from id_card_cropping.utils import label_map_util
+from ide_passport.find_face.sift_flann import sift
+from ide_passport.extractor.utils import label_map_util
 from anti_spoofing.face_anti_spoofing import detect
-from id_card_cropping.utils import visualization_utils as vis_util
+from ide_passport.extractor.utils import visualization_utils as vis_util
 
 #-------Static Value--------#
 
@@ -109,7 +109,6 @@ def cropping_id_card(name, direction):
         if(aspec < 1.3):
             return False
         id_card.resize((int(width * 1.3), int(height * 1.3))).save('static/dataset/' + name + '/' + card_str + '.png', quality=95)
-
         return True
 
 #--------Check with database--------#
@@ -207,7 +206,6 @@ def recognize(img, useremail):
     if not result.encoded_face is None:
         data = result.encoded_face
         dist = face_recognition.face_distance(encodings, data['encodings'][0])[0]
-        # loop over the encoded faces
         for encoding in encodings:
             matches = face_recognition.compare_faces(data['encodings'], encoding)
             name = 'Unknown'
@@ -244,7 +242,6 @@ def encode_face(img, name, email, detection_method):
     encodings = face_recognition.face_encodings(rgb, boxes)
     
     for encoding in encodings:
-        # add each encoding and name to the list
         knownEncodings.append(encoding)
         knownNames.append(name)
 
@@ -294,6 +291,7 @@ def IDE_PASS_DE_EXT(request):
                 else:
                     session['id_capture'] = True
                     data['success'] = True
+                    
     return data
 
 
